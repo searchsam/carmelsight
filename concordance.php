@@ -3,7 +3,7 @@
 Plugin Name: Carmelsight
 Description: Keyword search engine for books on Carmelite saints
 Version: 1.0
-Author: Tu Nombre
+Author: Samuel Gutiérrez
 */
 
 // Requires plugin files
@@ -60,6 +60,7 @@ function ms_get_books()
 {
     $author_id = intval($_GET['author_id']);
     $books = ms_get_books_by_author($author_id);
+
     echo json_encode($books);
     wp_die();
 }
