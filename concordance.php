@@ -28,24 +28,47 @@ function ms_render_form()
 {
     ob_start(); ?>
     <form id="ms-search-form">
-        <label>Palabra o frace: <input type="text" name="keyword" required></label><br><br>
-        <label>Autor:
-            <select name="author" id="ms-author" required>
-                <option value="">Seleccione un autor</option>
-                <?php
-                $authors = ms_get_authors();
-                foreach ($authors as $author) {
-                    echo '<option value="' . esc_attr($author->id) . '">' . esc_html($author->name) . '</option>';
-                }
-                ?>
-            </select>
-        </label><br><br>
-        <label>Libro:
-            <select name="book" id="ms-book" required>
-                <option value="">Seleccione un libro</option>
-            </select>
-        </label><br><br>
-        <button type="submit">Buscar</button>
+        <div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-28f84493 wp-block-columns-is-layout-flex">
+            <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+                <div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex">
+                    <label for="ms-keyword">Palabra o frase:
+                        <input type="text" name="keyword" id="ms-keyword" required>
+                    </label>
+                </div>
+            </div>
+
+            <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+                <div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex">
+                    <label for="ms-author">Autor:
+                        <select name="author" id="ms-author" required>
+                            <option value="">Seleccione un autor</option>
+                            <?php
+                            $authors = ms_get_authors();
+                            foreach ($authors as $author) {
+                                echo '<option value="' . esc_attr($author->id) . '">' . esc_html($author->name) . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+                <div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-fe9cc265 wp-block-group-is-layout-flex">
+                    <label for="ms-book">Libro:
+                        <select name="book" id="ms-book" required>
+                            <option value="">Seleccione un libro</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+            <div class="wp-block-button btn-secondary">
+                <button class="wp-element-button" type="submit">Buscar</button>
+            </div>
+        </div>
     </form>
     <div id="ms-results"></div>
 <?php
@@ -78,10 +101,14 @@ function ms_search_keyword()
     $quotes = ms_search_on_books($author_id, $keyword, $book_id);
 
     if (empty($quotes)) {
+        echo '<div style="height: 100px" aria-hidden="true" class="wp-block-spacer"></div>';
+        echo '<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">';
         echo '<p>No se encontraron Concordancias.</p>';
+        echo '</div>';
         wp_die();
     }
 
+    echo '<div style="height: 100px" aria-hidden="true" class="wp-block-spacer"></div>';
     echo '<div id="ms-table-container">';
     echo '<table id="ms-table-results" border="1" cellpadding="5">';
     echo '<thead><tr><th>Autor</th><th>Libro</th><th>Cita</th><th>Extracto</th><th>Ocurrencias</th></tr></thead>';
