@@ -52,20 +52,20 @@ function ms_search_on_books($author_id, $keyword, $book_id = 0)
     }
 
     $sql .= "SELECT atbl.name as author, btbl.name as book, ctbl.abbreviation as abbreviation, qtbl.chapter as chapter, qtbl.numeral as numeral, qtbl.quote as quote
-    FROM " . $quoteTable . " qtbl, " . $codeTable . " ctbl, " . $bookTable . " btbl, " . $authorTable . " atbl
+    FROM $quoteTable qtbl, $codeTable ctbl, $bookTable btbl, $authorTable atbl
     WHERE qtbl.book_code_id = ctbl.id
     AND btbl.id = ctbl.book_id
     AND atbl.id = btbl.author_id ";
 
     if ($author_id !== 1) {
-        $sql .= "AND atbl.id = " . $author_id . " ";
+        $sql .= "AND atbl.id = $author_id ";
     }
 
     if (! in_array($book_id, [55, 56, 57, 58], true)) {
-        $sql .= "AND btbl.id = " . $book_id . " ";
+        $sql .= "AND btbl.id = $book_id ";
     }
 
-    $sql .= 'AND qtbl.quote LIKE "%' . $keyword . '%";';
+    $sql .= "AND qtbl.quote LIKE '%$keyword%';";
 
     return $wpdb->get_results($sql);
 }
