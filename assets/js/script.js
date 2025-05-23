@@ -73,19 +73,3 @@ function paginateTable(tableId, paginationId, rowsPerPage = 10) {
     showPage(1);
   }
 }
-
-// Run after displaying results
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-  formData.append('action', 'ms_search_keyword');
-
-  fetch(ms_ajax.url, {
-    method: 'POST',
-    body: formData
-  }).then(r => r.text())
-    .then(html => {
-      results.innerHTML = html;
-      paginateTable('ms-table-results', 'ms-pagination', 10); // 10 rows per page
-    });
-});
