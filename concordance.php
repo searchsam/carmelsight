@@ -146,7 +146,7 @@ function ms_search_keyword()
 add_action("wp_head", function () {
     echo "<style>
     .ms-highlight { background: yellow; font-weight: bold; }
-    #ms-pagination button { margin: 2px; padding: 4px 8px; }
-    #ms-pagination button.active { font-weight: bold; background: #eee; }
+    #ms-pagination button { margin: 2px; padding: 4px 8px; border: 1px solid #7b431e; color: #7b431e; }
+    #ms-pagination button.active { font-weight: bold; background: #7b431e; color: #fff; }
     </style>";
 });
