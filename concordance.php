@@ -45,7 +45,7 @@ function ms_render_form()
                             <?php
                             $authors = ms_get_authors();
                             foreach ($authors as $author) {
-                                echo '<option value="" . esc_attr($author->id) . "">' . esc_html($author->name) . '</option>';
+                                echo '<option value="' . esc_attr($author->id) . '">' . esc_html($author->name) . '</option>';
                             }
                             ?>
                         </select>
